@@ -8,8 +8,6 @@ Author URI: https://rileylitchfield.com
 License: GPL2
 */
 
-
-
 // Display the subtitle using the applied styling
 function display_subtitle()
 {
