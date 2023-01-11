@@ -1,20 +1,40 @@
 <?php
 /*
-Plugin Name: Special Post
-Description: A custom plugin to add functionality to posts
-Version: 1.0.7
+Plugin Name: Special Subtitle
+Description: A plugin to apply styles to blog post subtitles
+Version: 1.1.3
 Author: Riley Litchfield
 Author URI: https://rileylitchfield.com
 License: GPL2
 */
 
-// Return the special subtitle as a string
+
+
+// Display the subtitle using the applied styling
 function display_subtitle()
 {
-  $special_subtitle = get_field('special_subtitle');
+  // Loop over the checkbox values and add them to the styling variable if they exist
+  $checkbox_values = get_field('text_emphasis');
+  $styling = '';
+  if ($checkbox_values) {
+    if (in_array('bold', $checkbox_values)) {
+      $styling .= 'font-weight: bold;';
+    }
+    if (in_array('italics', $checkbox_values)) {
+      $styling .= 'font-style: italic;';
+    }
+    if (in_array('underline', $checkbox_values)) {
+      $styling .= 'text-decoration: underline;';
+    }
+  }
+  // Check if font size exists and add it to styling variable
   $special_font_size = get_field('special_font_size');
-  return '<h2 style="font-style:italic;font-size:' . $special_font_size . 'px;">' . $special_subtitle . '</h2>';
+  if ($special_font_size) {
+    $styling .= 'font-size:' . $special_font_size . 'px;';
+  }
+  // Get the special subtitle
+  $special_subtitle = get_field('special_subtitle');
+  // return the formatted subtitle
+  return '<h2 style="' . $styling . '">' . $special_subtitle . '</h2>';
 }
-
-// Create shortcode
 add_shortcode('display_subtitle', 'display_subtitle');
