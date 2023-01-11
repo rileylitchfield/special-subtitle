@@ -2,7 +2,7 @@
 /*
 Plugin Name: Special Subtitle
 Description: A plugin to apply styles to blog post subtitles
-Version: 1.1.3
+Version: 1.1.6
 Author: Riley Litchfield
 Author URI: https://rileylitchfield.com
 License: GPL2
@@ -36,3 +36,13 @@ function display_subtitle()
   return '<h2 style="' . $styling . '">' . $special_subtitle . '</h2>';
 }
 add_shortcode('display_subtitle', 'display_subtitle');
+
+// Load custom css file for post editor view
+function custom_acf_backend()
+{
+  $screen = get_current_screen();
+  if ('post' === $screen->base) {
+    wp_enqueue_style('custom-acf-backend', plugin_dir_url(__FILE__) . './custom-acf-backend.css');
+  }
+}
+add_action('admin_head', 'custom_acf_backend');
