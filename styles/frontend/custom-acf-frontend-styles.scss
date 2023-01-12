@@ -1,0 +1,10 @@
+// Display subtitle and toggle button in flex layout
+#special-subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    #special-button {
+        outline: none;
+    }
+}

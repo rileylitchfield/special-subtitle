@@ -2,7 +2,7 @@
 /*
 Plugin Name: Special Subtitle
 Description: A plugin to apply styles to blog post subtitles
-Version: 1.4.4
+Version: 1.5.0
 Author: Riley Litchfield
 Author URI: https://rileylitchfield.com
 License: GPL2
@@ -14,6 +14,7 @@ function add_jquery_script()
   wp_enqueue_script('custom-acf-jquery', plugin_dir_url(__FILE__) . 'js/custom-acf-jquery.js', array('jquery'), '', true);
 }
 add_action('wp_enqueue_scripts', 'add_jquery_script');
+
 
 // Get values from ACF fields and set styling variables
 function set_styling()
@@ -56,12 +57,19 @@ function display_subtitle()
 }
 add_shortcode('display_subtitle', 'display_subtitle');
 
-// Load custom css file for post editor view
-function custom_acf_backend_styles()
+// Load custom css for backend
+function enqueue_custom_css_backend()
 {
   $screen = get_current_screen();
   if ('post' === $screen->base) {
-    wp_enqueue_style('custom-acf-backend-styles', plugin_dir_url(__FILE__) . 'styles/custom-acf-backend-styles.css');
+    wp_enqueue_style('custom-acf-backend-styles', plugin_dir_url(__FILE__) . 'styles/backend/custom-acf-backend-styles.css');
   }
 }
-add_action('admin_head', 'custom_acf_backend_styles');
+add_action('admin_head', 'enqueue_custom_css_backend');
+
+// Load custom css for frontend 
+function enqueue_custom_css_frontend()
+{
+  wp_enqueue_style('custom-acf-frontend-styles', plugin_dir_url(__FILE__) . 'styles/frontend/custom-acf-frontend-styles.css');
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_css_frontend');

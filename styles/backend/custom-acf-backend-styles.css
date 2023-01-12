@@ -1,10 +1,4 @@
 /* Define variables for colors and font-sizes */
-#special-subtitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 /* Style fields */
 .acf-field {
   padding: 10px;
