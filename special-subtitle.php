@@ -2,12 +2,20 @@
 /*
 Plugin Name: Special Subtitle
 Description: A plugin to apply styles to blog post subtitles
-Version: 1.3.4
+Version: 1.4.4
 Author: Riley Litchfield
 Author URI: https://rileylitchfield.com
 License: GPL2
 */
 
+// Load jQuery and custom js file
+function add_jquery_script()
+{
+  wp_enqueue_script('custom-acf-jquery', plugin_dir_url(__FILE__) . 'js/custom-acf-jquery.js', array('jquery'), '', true);
+}
+add_action('wp_enqueue_scripts', 'add_jquery_script');
+
+// Get values from ACF fields and set styling variables
 function set_styling()
 {
   // Initialize styling variable
@@ -41,7 +49,10 @@ function display_subtitle()
   // Get the special subtitle
   $special_subtitle = get_field('special_subtitle');
   // return the formatted subtitle
-  return '<h2 style="' . $styling . '">' . $special_subtitle . '</h2>';
+  return '<div id="special-subtitle">
+  <h2 style="' . $styling . '">' . $special_subtitle . '</h2>
+  <button id="special-button">Toggle Content</button>
+  </div>';
 }
 add_shortcode('display_subtitle', 'display_subtitle');
 
