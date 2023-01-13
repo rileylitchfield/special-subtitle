@@ -8,4 +8,4 @@ Or, it could add functionality that isn't available or quickly accessible in the
 The subtitle has a 200 character limit. <br>
 Adjusted the width of the Special Font Size field so the user can easily see the appended units (px).
 
-<img src="https://ibb.co/fkj4w3v"/>
+<img src="https://i.ibb.co/y6HWjzS/Screenshot-2023-01-13-151632.png" alt="Screenshot-2023-01-13-151632" border="0">
